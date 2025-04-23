@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { animateScroll as scroll, scroller } from 'react-scroll';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -9,7 +10,7 @@ export default function Home() {
   const [threadId, setThreadId] = useState(null);
   const messagesEndRef = useRef(null);
 
-  // 初始化对话线程
+  // Initialize conversation thread
   useEffect(() => {
     const initializeThread = async () => {
       try {
@@ -28,23 +29,33 @@ export default function Home() {
     initializeThread();
   }, []);
 
-  // 滚动到最新消息
+  // Scroll to latest message with react-scroll
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
   }, [messages]);
+
+  const scrollToBottom = () => {
+    scroll.scrollToBottom({
+      containerId: 'chatContainer',
+      duration: 300,
+      smooth: true,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // 添加用户消息
+    // Add user message
     const userMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      // 发送到API
+      // Send to API
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -83,7 +94,11 @@ export default function Home() {
       </header>
       
       <main className={styles.main}>
-        <div className={styles.chatContainer}>
+        <div 
+          id="chatContainer" 
+          className={styles.chatContainer}
+          style={{ overflowY: 'auto' }} // Ensure container is scrollable
+        >
           {messages.map((msg, index) => (
             <div 
               key={index} 
