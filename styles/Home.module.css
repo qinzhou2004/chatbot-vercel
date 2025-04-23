@@ -1,177 +1,133 @@
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  .header {
-    text-align: center;
-    padding: 1rem 0;
-  }
+.header {
+  background: linear-gradient(to right, #00dddd, #2e9bdb);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 1rem;
+}
 
-  .chatWrapper {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-    height: calc(100% - 100px); /* 减去header高度 */
-  }
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
 
-  .chatContainer {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-    padding-bottom: 70px; /* 为输入框留出空间 */
-  }
+.header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
 
-  .inputForm {
-    position: sticky;
-    bottom: 0;
-    background: white;
-    padding: 1rem 0;
-    display: flex;
-    gap: 0.5rem;
-    border-top: 1px solid #eee;
-  }
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 80px; /* Space for fixed input */
+}
 
-  .inputForm input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
+.chatContainer {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-  .inputForm button {
-    padding: 0.5rem 1rem;
-    background: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+.message {
+  padding: 0.75rem;
+  border-radius: 1rem;
+  max-width: 80%;
+  margin: 0.25rem 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
 
-  .inputForm button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-  
-  /* 头部样式 */
-  .header {
-    background: linear-gradient(to right, #00dddd, #2e9bdb);
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-    margin-bottom: 1rem;
-  }
-  
-  .header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-  }
-  
-  .header p {
-    margin: 0.5rem 0 0;
-    font-size: 1.1rem;
-  }
-  
-  /* 聊天容器 */
-  .chatContainer {
-    flex: 1;
-    padding: 1rem;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  /* 消息通用样式 */
-  .message {
-    padding: 0.75rem;
-    border-radius: 1rem;
-    max-width: 80%;
-    margin: 0.25rem 0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-  
-  /* 用户消息 */
-  .userMessage {
-    background-color: #e3f2fd;
-    border-radius: 1rem 1rem 0 1rem;
-    margin-left: auto;
-  }
-  
-  /* 助手消息 */
-  .assistantMessage {
-    background-color: white;
-    border-radius: 1rem 1rem 1rem 0;
-    margin-right: auto;
-  }
-  
-  /* 第一条消息 */
-  .firstMessage {
-    margin-top: 0 !important;
-  }
-  
-  /* 输入表单 */
-  .inputForm {
-    display: flex;
-    padding: 1rem;
-    background: white;
-    border-top: 1px solid #eee;
-  }
-  
-  .inputForm input {
-    flex: 1;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 1rem;
-    outline: none;
-    font-size: 1rem;
-  }
-  
-  .inputForm button {
-    margin-left: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(to right, #00dddd, #2e9bdb);
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .inputForm button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-  
-  /* 打字指示器 */
-  .typingIndicator {
-    display: flex;
-    padding: 0.5rem;
-    margin-right: auto;
-  }
-  
-  .typingDot {
-    width: 8px;
-    height: 8px;
-    margin: 0 2px;
-    background-color: #666;
-    border-radius: 50%;
-    opacity: 0;
-    animation: typingAnimation 1.4s infinite ease-in-out;
-  }
-  
-  .typingDot:nth-child(1) { animation-delay: 0s; }
-  .typingDot:nth-child(2) { animation-delay: 0.2s; }
-  .typingDot:nth-child(3) { animation-delay: 0.4s; }
-  
-  @keyframes typingAnimation {
-    0% { opacity: 0.3; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(-5px); }
-    100% { opacity: 0.3; transform: translateY(0); }
-  }
+.userMessage {
+  background-color: #e3f2fd;
+  border-radius: 1rem 1rem 0 1rem;
+  margin-left: auto;
+}
+
+.assistantMessage {
+  background-color: white;
+  border-radius: 1rem 1rem 1rem 0;
+  margin-right: auto;
+}
+
+.firstMessage {
+  margin-top: 0 !important;
+}
+
+.inputForm {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+
+.inputForm input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+.inputForm button {
+  margin-left: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #00dddd, #2e9bdb);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.inputForm button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.typingIndicator {
+  display: flex;
+  padding: 0.5rem;
+  margin-right: auto;
+}
+
+.typingDot {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: #666;
+  border-radius: 50%;
+  opacity: 0;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typingDot:nth-child(1) { animation-delay: 0s; }
+.typingDot:nth-child(2) { animation-delay: 0.2s; }
+.typingDot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingAnimation {
+  0% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+  100% { opacity: 0.3; transform: translateY(0); }
+}
