@@ -81,7 +81,7 @@ export default function Home() {
         <h1>Soporte NKZN</h1>
         <p>Expertos en tecnología!</p>
       </header>
-      
+      <span> </span>
       <div className={styles.chatLayout}>
         <div 
           ref={chatContainerRef}
