@@ -1,16 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { animateScroll as scroll, scroller } from 'react-scroll';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [threadId, setThreadId] = useState(null);
-  const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
-  // Initialize conversation thread
+  // 初始化对话线程
   useEffect(() => {
     const initializeThread = async () => {
       try {
@@ -29,33 +28,23 @@ export default function Home() {
     initializeThread();
   }, []);
 
-  // Scroll to latest message with react-scroll
+  // 滚动到最新消息
   useEffect(() => {
-    if (messages.length > 0) {
-      scrollToBottom();
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
-
-  const scrollToBottom = () => {
-    scroll.scrollToBottom({
-      containerId: 'chatContainer',
-      duration: 300,
-      smooth: true,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    // Add user message
     const userMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      // Send to API
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -93,11 +82,10 @@ export default function Home() {
         <p>Expertos en tecnología!</p>
       </header>
       
-      <main className={styles.main}>
+      <div className={styles.chatLayout}>
         <div 
-          id="chatContainer" 
+          ref={chatContainerRef}
           className={styles.chatContainer}
-          style={{ overflowY: 'auto' }} // Ensure container is scrollable
         >
           {messages.map((msg, index) => (
             <div 
@@ -116,22 +104,23 @@ export default function Home() {
               <div className={styles.typingDot}></div>
             </div>
           )}
-          <div ref={messagesEndRef} />
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.inputForm}>
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Escribe tu mensaje aquí..."
-            disabled={isLoading}
-          />
-          <button type="submit" disabled={isLoading}>
-            Enviar
-          </button>
-        </form>
-      </main>
+        <div className={styles.inputArea}>
+          <form onSubmit={handleSubmit} className={styles.inputForm}>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Escribe tu mensaje aquí..."
+              disabled={isLoading}
+            />
+            <button type="submit" disabled={isLoading}>
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

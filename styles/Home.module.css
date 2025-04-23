@@ -1,133 +1,116 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   max-width: 800px;
   margin: 0 auto;
   padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 .header {
-  background: linear-gradient(to right, #00dddd, #2e9bdb);
-  color: white;
-  padding: 1.5rem;
   text-align: center;
-  border-radius: 0 0 10px 10px;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
+  flex-shrink: 0;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-.header p {
-  margin: 0.5rem 0 0;
-  font-size: 1.1rem;
-}
-
-.main {
-  flex: 1;
+.chatLayout {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  height: calc(100% - 80px); /* 减去header高度 */
   position: relative;
-  padding-bottom: 80px; /* Space for fixed input */
 }
 
 .chatContainer {
   flex: 1;
-  padding: 1rem;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  scroll-behavior: smooth;
 }
 
-.message {
-  padding: 0.75rem;
-  border-radius: 1rem;
-  max-width: 80%;
-  margin: 0.25rem 0;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.userMessage {
-  background-color: #e3f2fd;
-  border-radius: 1rem 1rem 0 1rem;
-  margin-left: auto;
-}
-
-.assistantMessage {
-  background-color: white;
-  border-radius: 1rem 1rem 1rem 0;
-  margin-right: auto;
-}
-
-.firstMessage {
-  margin-top: 0 !important;
-}
-
-.inputForm {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
+.inputArea {
   padding: 1rem;
   background: white;
   border-top: 1px solid #eee;
-  z-index: 100;
+  position: sticky;
+  bottom: 0;
+}
+
+.inputForm {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .inputForm input {
   flex: 1;
   padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 1rem;
-  outline: none;
-  font-size: 1rem;
+  border-radius: 20px;
 }
 
 .inputForm button {
-  margin-left: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(to right, #00dddd, #2e9bdb);
+  background: #0070f3;
   color: white;
   border: none;
-  border-radius: 1rem;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 1rem;
 }
 
 .inputForm button:disabled {
-  opacity: 0.7;
+  background: #ccc;
   cursor: not-allowed;
 }
 
+/* 消息样式 */
+.message {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  max-width: 80%;
+}
+
+.userMessage {
+  background: #0070f3;
+  color: white;
+  margin-left: auto;
+}
+
+.assistantMessage {
+  background: #f0f0f0;
+  margin-right: auto;
+}
+
+.firstMessage {
+  margin-top: auto;
+}
+
+/* 打字指示器 */
 .typingIndicator {
   display: flex;
-  padding: 0.5rem;
-  margin-right: auto;
+  padding: 1rem;
+  justify-content: center;
 }
 
 .typingDot {
   width: 8px;
   height: 8px;
-  margin: 0 2px;
-  background-color: #666;
+  background: #ccc;
   border-radius: 50%;
-  opacity: 0;
+  margin: 0 2px;
   animation: typingAnimation 1.4s infinite ease-in-out;
 }
 
-.typingDot:nth-child(1) { animation-delay: 0s; }
-.typingDot:nth-child(2) { animation-delay: 0.2s; }
-.typingDot:nth-child(3) { animation-delay: 0.4s; }
+.typingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 @keyframes typingAnimation {
-  0% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-5px); }
-  100% { opacity: 0.3; transform: translateY(0); }
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
 }
