@@ -81,7 +81,7 @@ export default function Home() {
         <h1>Soporte NKZN</h1>
         <p>Expertos en tecnología!</p>
       </header>
-
+      <body>
       <main className={styles.main}>
         <div className={styles.chatContainer}>
           {messages.map((msg, index) => (
@@ -117,6 +117,8 @@ export default function Home() {
           </button>
         </form>
       </main>
+      </body>
     </div>
+    
   );
 }
