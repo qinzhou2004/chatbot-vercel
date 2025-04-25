@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh; /* 使用min-height而不是height */
   max-width: 800px;
   margin: 0 auto;
   padding: 0;
@@ -10,14 +10,12 @@
 .header {
   text-align: center;
   padding: 1rem 0;
-  flex-shrink: 0;
 }
 
 .chatLayout {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  height: calc(100% - 80px); /* 减去header高度 */
+  flex: 1; /* 这会使其填充剩余空间 */
   position: relative;
 }
 
@@ -27,7 +25,7 @@
   padding: 1rem;
   padding-bottom: 0;
   scroll-behavior: smooth;
-  height: 72vh;
+  /* 移除固定高度 */
 }
 
 .inputArea {
@@ -36,6 +34,8 @@
   border-top: 1px solid #eee;
   position: sticky;
   bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .inputForm {
