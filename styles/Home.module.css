@@ -4,7 +4,6 @@
   height: 100vh;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0;
 }
 
 .header {
@@ -16,26 +15,24 @@
 .chatLayout {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  height: calc(100% - 80px); /* 减去header高度 */
-  position: relative;
+  flex: 1; /* 重点：不设置固定高度，直接填满剩余 */
+  overflow: hidden; /* 防止子元素超出 */
 }
 
 .chatContainer {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
-  padding-bottom: 0;
   scroll-behavior: smooth;
-  height: 100%;
 }
 
 .inputArea {
-  padding: 1rem;
   background: white;
   border-top: 1px solid #eee;
+  padding: 1rem;
   position: sticky;
   bottom: 0;
+  z-index: 1; /* 防止被遮挡 */
 }
 
 .inputForm {
