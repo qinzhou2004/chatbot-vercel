@@ -4,6 +4,7 @@
   height: 100vh;
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
 }
 
 .header {
@@ -12,37 +13,35 @@
   flex-shrink: 0;
 }
 
-.chatLayout {
+.chatWrapper {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-  position: relative; /* 为sticky定位提供上下文 */
+  height: calc(100vh - 120px); /* 减去header和输入栏高度 */
+  position: relative;
 }
 
-.chatContainer {
+.chatArea {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.messagesContainer {
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
   background: #f9f9f9;
+  scroll-behavior: smooth;
 }
 
-.inputArea {
+.inputContainer {
   position: sticky;
   bottom: 0;
+  background: white;
   padding: 1rem;
-  background: #fff;
   border-top: 1px solid #eee;
-  z-index: 10; /* 确保输入框在其他内容之上 */
-}
-
-/* 其他样式保持不变... */
-
-.inputArea {
-  flex-shrink: 0; /* 输入区不要伸缩 */
-  padding: 1rem;
-  background: #fff;
-  border-top: 1px solid #eee;
+  z-index: 10;
 }
 
 .inputForm {
@@ -66,11 +65,6 @@
   cursor: pointer;
 }
 
-.inputForm button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
 /* 消息样式 */
 .message {
   margin-bottom: 1rem;
@@ -90,35 +84,28 @@
   margin-right: auto;
 }
 
-.firstMessage {
-  margin-top: auto;
-}
-
-/* 打字指示器 */
 .typingIndicator {
   display: flex;
-  padding: 1rem;
   justify-content: center;
+  padding: 0.5rem;
 }
 
-.typingDot {
-  width: 8px;
-  height: 8px;
-  background: #ccc;
-  border-radius: 50%;
+.typingIndicator span {
+  font-size: 2rem;
+  line-height: 1;
   margin: 0 2px;
   animation: typingAnimation 1.4s infinite ease-in-out;
 }
 
-.typingDot:nth-child(2) {
+.typingIndicator span:nth-child(2) {
   animation-delay: 0.2s;
 }
 
-.typingDot:nth-child(3) {
+.typingIndicator span:nth-child(3) {
   animation-delay: 0.4s;
 }
 
 @keyframes typingAnimation {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-5px); }
+  0%, 60%, 100% { opacity: 0.3; }
+  30% { opacity: 1; }
 }

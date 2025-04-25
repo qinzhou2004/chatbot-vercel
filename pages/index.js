@@ -74,39 +74,38 @@ export default function Home() {
       <Head>
         <title>Soporte NKZN</title>
         <meta name="description" content="Expertos en tecnología!" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header className={styles.header}>
         <h1>Soporte NKZN</h1>
         <p>Expertos en tecnología!</p>
       </header>
-      <span> </span>
-      <div className={styles.chatLayout}>
-        <div 
-          ref={chatContainerRef}
-          className={styles.chatContainer}
-        >
-          {messages.map((msg, index) => (
-            <div 
-              key={index} 
-              className={`${styles.message} ${
-                msg.role === 'user' ? styles.userMessage : styles.assistantMessage
-              } ${index === 0 ? styles.firstMessage : ''}`}
-            >
-              {msg.content}
-            </div>
-          ))}
-          {isLoading && (
-            <div className={styles.typingIndicator}>
-              <div className={styles.typingDot}></div>
-              <div className={styles.typingDot}></div>
-              <div className={styles.typingDot}></div>
-            </div>
-          )}
+
+      <div className={styles.chatWrapper}>
+        <div className={styles.chatArea}>
+          <div ref={chatContainerRef} className={styles.messagesContainer}>
+            {messages.map((msg, index) => (
+              <div 
+                key={index} 
+                className={`${styles.message} ${
+                  msg.role === 'user' ? styles.userMessage : styles.assistantMessage
+                }`}
+              >
+                {msg.content}
+              </div>
+            ))}
+            {isLoading && (
+              <div className={styles.typingIndicator}>
+                <span>•</span>
+                <span>•</span>
+                <span>•</span>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
         </div>
 
-        <div className={styles.inputArea}>
+        <div className={styles.inputContainer}>
           <form onSubmit={handleSubmit} className={styles.inputForm}>
             <input
               type="text"
