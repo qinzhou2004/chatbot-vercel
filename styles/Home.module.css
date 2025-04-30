@@ -10,6 +10,7 @@
 .header {
   text-align: center;
   padding: 1rem 0;
+  background: linear-gradient(to right, #00dddd, #1a4299);
 }
 
 .chatLayout {
