@@ -1,0 +1,9 @@
+{
+  "title": "我的聊天助手",
+  "subtitle": "专业客服支持",
+  "primaryColor": "#00dddd",
+  "welcomeMessage": "您好！请问有什么可以帮您？",
+  "errorMessage": "服务暂时不可用，请稍后再试",
+  "inputPlaceholder": "请输入您的问题...",
+  "sendButtonText": "发送"
+}
