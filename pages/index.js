@@ -3,13 +3,24 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  // Configurable parameters (could also come from props or API)
+  const config = {
+    title: "Soporte NKZN",
+    description: "Expertos en tecnología!",
+    greeting: "¡Hola! Soy tu asistente de NKZN. ¿En qué puedo ayudarte hoy?",
+    errorMessage: "Disculpa, estoy teniendo dificultades. ¿Podrías intentarlo de nuevo?",
+    placeholder: "Escribe tu mensaje aquí...",
+    buttonText: "Enviar",
+    theme: "default" // Could be used for different styling
+  };
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [threadId, setThreadId] = useState(null);
   const chatContainerRef = useRef(null);
 
-  // 初始化对话线程
+  // Initialize chat thread
   useEffect(() => {
     const initializeThread = async () => {
       try {
@@ -18,7 +29,7 @@ export default function Home() {
         setThreadId(data.threadId);
         setMessages([{
           role: 'assistant',
-          content: '¡Hola! Soy tu asistente de NKZN. ¿En qué puedo ayudarte hoy?'
+          content: config.greeting
         }]);
       } catch (error) {
         console.error('Error initializing thread:', error);
@@ -28,7 +39,7 @@ export default function Home() {
     initializeThread();
   }, []);
 
-  // 滚动到最新消息
+  // Auto-scroll to newest message
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -62,7 +73,7 @@ export default function Home() {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Disculpa, estoy teniendo dificultades. ¿Podrías intentarlo de nuevo?' 
+        content: config.errorMessage 
       }]);
     } finally {
       setIsLoading(false);
@@ -70,18 +81,18 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${styles[config.theme]}`}>
       <Head>
-        <title>Soporte NKZN</title>
-        <meta name="description" content="Expertos en tecnología!" />
+        <title>{config.title}</title>
+        <meta name="description" content={config.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header className={styles.header}>
-        <h1>Soporte NKZN</h1>
-        <p>Expertos en tecnología!</p>
+        <h1>{config.title}</h1>
+        <p>{config.description}</p>
       </header>
-      <span> </span>
+      
       <div className={styles.chatLayout}>
         <div 
           ref={chatContainerRef}
@@ -112,11 +123,11 @@ export default function Home() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribe tu mensaje aquí..."
+              placeholder={config.placeholder}
               disabled={isLoading}
             />
             <button type="submit" disabled={isLoading}>
-              Enviar
+              {config.buttonText}
             </button>
           </form>
         </div>
