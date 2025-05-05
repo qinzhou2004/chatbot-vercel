@@ -1,13 +1,16 @@
 {
-    "name": "chatbot-generator",
+    "name": "chatbot-vercel",
     "version": "1.0.0",
     "scripts": {
-      "generate": "node scripts/generate.js",
-      "gen:example": "node scripts/generate.js --name=example --title=示例客服 --color=#FF5733 --welcome=欢迎咨询示例客服"
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
     },
     "dependencies": {
-      "next": "^14.1.0",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0"
+        "next": "^14.1.0",
+        "openai": "^4.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-scroll": "^1.9.3"
     }
-  }
+}
