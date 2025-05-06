@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       private: false,
     });
 
-    // 2. Generate config file content
+    // 2. Generate config file content for template/bot-config.js
     const configContent = `// Configuración generada automáticamente
 module.exports = ${JSON.stringify(botConfig, null, 2)}`;
 
@@ -114,7 +114,7 @@ ${botConfig.cssConfig.showTypingIndicator ? '.typingIndicator { display: flex; }
 
     // 4. Upload files to the new repository
     await createOrUpdateFile(
-      'config/bot-config.js',
+      'template/bot-config.js',
       configContent,
       'Añadir configuración del bot'
     );

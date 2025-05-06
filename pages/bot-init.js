@@ -28,12 +28,6 @@ export default function BotInitializer() {
       fontFamily: 'Arial, sans-serif',
       fontSize: '16px',
       darkMode: false,
-    },
-    apiConfig: {
-      model: 'gpt-3.5-turbo',
-      temperature: 0.7,
-      maxTokens: 500,
-      enableMemory: true,
     }
   });
 
@@ -49,16 +43,6 @@ export default function BotInitializer() {
       ...config,
       cssConfig: {
         ...config.cssConfig,
-        [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
-      },
-    });
-  };
-
-  const handleApiChange = (e) => {
-    setConfig({
-      ...config,
-      apiConfig: {
-        ...config.apiConfig,
         [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value,
       },
     });
@@ -134,12 +118,6 @@ export default function BotInitializer() {
           onClick={() => setActiveTab('behavior')}
         >
           Comportamiento
-        </button>
-        <button 
-          className={activeTab === 'api' ? styles.activeTab : ''}
-          onClick={() => setActiveTab('api')}
-        >
-          Configuración API
         </button>
       </div>
 
@@ -439,64 +417,6 @@ export default function BotInitializer() {
                 value={config.responseDelay}
                 onChange={(e) => setConfig({...config, responseDelay: parseInt(e.target.value) || 0})}
               />
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'api' && (
-          <div className={styles.section}>
-            <h2>Configuración de la API</h2>
-            
-            <div className={styles.formGroup}>
-              <label>Modelo de OpenAI</label>
-              <select
-                name="model"
-                value={config.apiConfig.model}
-                onChange={handleApiChange}
-              >
-                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-                <option value="gpt-4">GPT-4</option>
-                <option value="gpt-4-turbo">GPT-4 Turbo</option>
-              </select>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Temperatura (Creatividad)</label>
-              <input
-                type="range"
-                name="temperature"
-                min="0"
-                max="1"
-                step="0.1"
-                value={config.apiConfig.temperature}
-                onChange={handleApiChange}
-              />
-              <span>{config.apiConfig.temperature}</span>
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Máximo de Tokens</label>
-              <input
-                type="number"
-                name="maxTokens"
-                min="100"
-                max="2000"
-                step="100"
-                value={config.apiConfig.maxTokens}
-                onChange={handleApiChange}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="enableMemory"
-                  checked={config.apiConfig.enableMemory}
-                  onChange={handleApiChange}
-                />
-                Habilitar Memoria de Conversación
-              </label>
             </div>
           </div>
         )}
