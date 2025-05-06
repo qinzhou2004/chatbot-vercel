@@ -1,11 +1,11 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "qqqqqqqq",
-  "mainHeading": "qqqqqqqqqqq",
-  "subHeading": "qqqqqqqqqqqq",
+  "pageTitle": "Chatbot_eugeniacavero",
+  "mainHeading": "Su asistente de salud mental",
+  "subHeading": "Eugenia Cavero contigo",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
-  "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
+  "welcomeMessage": "Hola soy atención al cliente de Eugenia Cavero. ¿Le puedo ayudar en algo?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
   "initialSuggestions": [
     "Pregunta frecuente 1",
@@ -16,8 +16,8 @@ module.exports = {
   "enableVoiceInput": false,
   "responseDelay": 1000,
   "cssConfig": {
-    "primaryColor": "#0070f3",
-    "secondaryColor": "#00dddd",
+    "primaryColor": "#faacfb",
+    "secondaryColor": "#bf38f0",
     "messageRadius": "18px",
     "inputRadius": "20px",
     "showTypingIndicator": true,
