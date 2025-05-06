@@ -1,11 +1,11 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "噢噢噢噢",
-  "mainHeading": "啊啊啊啊啊啊啊",
+  "pageTitle": "啊啊啊啊啊啊啊",
+  "mainHeading": "啊啊啊啊啊",
   "subHeading": "啊啊啊啊啊啊啊",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
-  "welcomeMessage": "Hola soy atención al cliente de Eugenia Cavero. ¿Le puedo ayudar en algo?",
+  "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
   "initialSuggestions": [
     "Pregunta frecuente 1",
