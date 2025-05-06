@@ -75,37 +75,65 @@ ${botConfig.cssConfig.darkMode ? `
 
 ${botConfig.cssConfig.showTypingIndicator ? '.typingIndicator { display: flex; }' : '.typingIndicator { display: none; }'}`;
 
-    // 4. Upload files to the new repository
-    await octokit.repos.createOrUpdateFileContents({
-      owner: process.env.GITHUB_ACCOUNT,
-      repo: repoName,
-      path: 'config/bot-config.js',
-      message: 'Añadir configuración del bot',
-      content: Buffer.from(configContent).toString('base64'),
-      branch: 'main'
-    });
+    // Helper function to create or update a file
+    const createOrUpdateFile = async (path, content, message) => {
+      try {
+        // Try to get the file first to see if it exists
+        const { data } = await octokit.repos.getContent({
+          owner: process.env.GITHUB_ACCOUNT,
+          repo: repoName,
+          path,
+          branch: 'main'
+        });
+        
+        // File exists, update it with the current SHA
+        return octokit.repos.createOrUpdateFileContents({
+          owner: process.env.GITHUB_ACCOUNT,
+          repo: repoName,
+          path,
+          message,
+          content: Buffer.from(content).toString('base64'),
+          sha: data.sha, // Include the current SHA
+          branch: 'main'
+        });
+      } catch (error) {
+        if (error.status === 404) {
+          // File doesn't exist, create it
+          return octokit.repos.createOrUpdateFileContents({
+            owner: process.env.GITHUB_ACCOUNT,
+            repo: repoName,
+            path,
+            message,
+            content: Buffer.from(content).toString('base64'),
+            branch: 'main'
+          });
+        }
+        throw error;
+      }
+    };
 
-    await octokit.repos.createOrUpdateFileContents({
-      owner: process.env.GITHUB_ACCOUNT,
-      repo: repoName,
-      path: 'styles/dynamic-styles.css',
-      message: 'Añadir estilos personalizados',
-      content: Buffer.from(cssContent).toString('base64'),
-      branch: 'main'
-    });
+    // 4. Upload files to the new repository
+    await createOrUpdateFile(
+      'config/bot-config.js',
+      configContent,
+      'Añadir configuración del bot'
+    );
+
+    await createOrUpdateFile(
+      'styles/dynamic-styles.css',
+      cssContent,
+      'Añadir estilos personalizados'
+    );
 
     // 5. Upload additional configuration files if needed
     if (botConfig.initialSuggestions && botConfig.initialSuggestions.length > 0) {
       const suggestionsContent = `export default ${JSON.stringify(botConfig.initialSuggestions, null, 2)}`;
       
-      await octokit.repos.createOrUpdateFileContents({
-        owner: process.env.GITHUB_ACCOUNT,
-        repo: repoName,
-        path: 'config/suggestions.js',
-        message: 'Añadir sugerencias iniciales',
-        content: Buffer.from(suggestionsContent).toString('base64'),
-        branch: 'main'
-      });
+      await createOrUpdateFile(
+        'config/suggestions.js',
+        suggestionsContent,
+        'Añadir sugerencias iniciales'
+      );
     }
 
     res.status(200).json({ success: true, repoUrl: repo.html_url });
