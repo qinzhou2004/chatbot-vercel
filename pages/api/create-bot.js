@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // 1. Create repository from template
     const { data: repo } = await octokit.repos.createUsingTemplate({
       template_owner: process.env.GITHUB_ACCOUNT,
-      template_repo: 'chatbot-vercel-admin',
+      template_repo: 'chatbot-vercel',
       name: repoName,
       private: false,
     });
