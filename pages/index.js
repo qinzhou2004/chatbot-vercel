@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import config from '../templates/bot-config';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -18,10 +19,14 @@ export default function Home() {
         setThreadId(data.threadId);
         setMessages([{
           role: 'assistant',
-          content: '¡Hola! Soy tu asistente de NKZN. ¿En qué puedo ayudarte hoy?'
+          content: config.welcomeMessage || '¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?'
         }]);
       } catch (error) {
         console.error('Error initializing thread:', error);
+        setMessages([{
+          role: 'assistant',
+          content: config.errorMessage || 'Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?'
+        }]);
       }
     };
     
@@ -62,7 +67,7 @@ export default function Home() {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Disculpa, estoy teniendo dificultades. ¿Podrías intentarlo de nuevo?' 
+        content: config.errorMessage || 'Disculpa, estoy teniendo dificultades. ¿Podrías intentarlo de nuevo?'
       }]);
     } finally {
       setIsLoading(false);
@@ -70,18 +75,38 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <div 
+      className={styles.container}
+      style={{
+        '--color-primary': config.cssConfig.primaryColor,
+        '--color-secondary': config.cssConfig.secondaryColor,
+        '--message-radius': config.cssConfig.messageRadius,
+        '--input-radius': config.cssConfig.inputRadius,
+        '--chat-width': config.cssConfig.chatWidth,
+        '--chat-height': config.cssConfig.chatHeight,
+        '--font-family': config.cssConfig.fontFamily,
+        '--font-size': config.cssConfig.fontSize,
+        maxWidth: config.cssConfig.chatWidth,
+        fontFamily: config.cssConfig.fontFamily,
+        fontSize: config.cssConfig.fontSize
+      }}
+    >
       <Head>
-        <title>Soporte NKZN</title>
-        <meta name="description" content="Expertos en tecnología!" />
+        <title>{config.pageTitle || 'Chatbot'}</title>
+        <meta name="description" content={config.subHeading || ''} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className={styles.header}>
-        <h1>Soporte NKZN</h1>
-        <p>Expertos en tecnología!</p>
+      <header 
+        className={styles.header}
+        style={{
+          background: `linear-gradient(to right, ${config.cssConfig.secondaryColor}, ${config.cssConfig.primaryColor})`
+        }}
+      >
+        <h1>{config.mainHeading || 'Chatbot'}</h1>
+        {config.subHeading && <p>{config.subHeading}</p>}
       </header>
-      <span> </span>
+
       <div className={styles.chatLayout}>
         <div 
           ref={chatContainerRef}
@@ -97,7 +122,7 @@ export default function Home() {
               {msg.content}
             </div>
           ))}
-          {isLoading && (
+          {isLoading && config.cssConfig.showTypingIndicator && (
             <div className={styles.typingIndicator}>
               <div className={styles.typingDot}></div>
               <div className={styles.typingDot}></div>
@@ -112,11 +137,11 @@ export default function Home() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribe tu mensaje aquí..."
+              placeholder={config.inputPlaceholder || 'Escribe tu mensaje aquí...'}
               disabled={isLoading}
             />
             <button type="submit" disabled={isLoading}>
-              Enviar
+              {config.submitButtonText || 'Enviar'}
             </button>
           </form>
         </div>

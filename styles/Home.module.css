@@ -1,23 +1,37 @@
 .container {
+  /* 定义CSS变量在容器级别 */
+  --color-primary: #0070f3;
+  --color-secondary: #00dddd;
+  --message-radius: 18px;
+  --input-radius: 20px;
+  --chat-width: 800px;
+  --chat-height: 600px;
+  --font-family: Arial, sans-serif;
+  --font-size: 16px;
+
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 使用min-height而不是height */
-  max-width: 800px;
+  min-height: 100vh;
+  max-width: var(--chat-width);
   margin: 0 auto;
   padding: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
 }
 
 .header {
   text-align: center;
   padding: 1rem 0;
-  background: linear-gradient(to right, #00dddd, #1a4299);
+  background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
+  color: white;
 }
 
 .chatLayout {
   display: flex;
   flex-direction: column;
-  flex: 1; /* 这会使其填充剩余空间 */
+  flex: 1;
   position: relative;
+  height: var(--chat-height);
 }
 
 .inputArea {
@@ -26,7 +40,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 800px;
+  max-width: var(--chat-width);
   padding: 1rem;
   background: white;
   border-top: 1px solid #eee;
@@ -34,7 +48,9 @@
 }
 
 .chatContainer {
-  padding-bottom: 80px; /* 为固定输入框留出空间 */
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 80px;
 }
 
 .inputForm {
@@ -46,15 +62,15 @@
   flex: 1;
   padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 20px;
+  border-radius: var(--input-radius);
 }
 
 .inputForm button {
   padding: 0.75rem 1.5rem;
-  background: #0070f3;
+  background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 20px;
+  border-radius: var(--input-radius);
   cursor: pointer;
 }
 
@@ -63,16 +79,15 @@
   cursor: not-allowed;
 }
 
-/* 消息样式 */
 .message {
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: 18px;
+  border-radius: var(--message-radius);
   max-width: 80%;
 }
 
 .userMessage {
-  background: #0070f3;
+  background: var(--color-primary);
   color: white;
   margin-left: auto;
 }
@@ -86,7 +101,6 @@
   margin-top: auto;
 }
 
-/* 打字指示器 */
 .typingIndicator {
   display: flex;
   padding: 1rem;
