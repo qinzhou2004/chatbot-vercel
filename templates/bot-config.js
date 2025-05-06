@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "eugeniacavero_chatbot",
-  "mainHeading": "Atención al cliente",
-  "subHeading": "Eugenia Cavero contigo",
+  "pageTitle": "噢噢噢噢",
+  "mainHeading": "啊啊啊啊啊啊啊",
+  "subHeading": "啊啊啊啊啊啊啊",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "Hola soy atención al cliente de Eugenia Cavero. ¿Le puedo ayudar en algo?",
