@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "ggggggggggggg",
-  "mainHeading": "aaaaaaaaaaa",
-  "subHeading": "aaaaaaaaaaaaa",
+  "pageTitle": "Mi Chatbot Personalizado",
+  "mainHeading": "Soporte NKZN",
+  "subHeading": "Expertos en tecnología!",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
@@ -16,8 +16,8 @@ module.exports = {
   "enableVoiceInput": false,
   "responseDelay": 1000,
   "cssConfig": {
-    "primaryColor": "#050c14",
-    "secondaryColor": "#021212",
+    "primaryColor": "#0070f3",
+    "secondaryColor": "#00dddd",
     "messageRadius": "18px",
     "inputRadius": "20px",
     "showTypingIndicator": true,
