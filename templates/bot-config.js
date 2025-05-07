@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "ffffffff",
-  "mainHeading": "ffffffffffff",
-  "subHeading": "ffffffffff",
+  "pageTitle": "zzzzzzz",
+  "mainHeading": "zzzzzzz",
+  "subHeading": "zzzzzzzzz",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
@@ -16,10 +16,10 @@ module.exports = {
   "enableVoiceInput": false,
   "responseDelay": 1000,
   "cssConfig": {
-    "primaryColor": "#0070f3",
-    "secondaryColor": "#00dddd",
-    "messageRadius": "18px",
-    "inputRadius": "20px",
+    "primaryColor": "#f2f2f2",
+    "secondaryColor": "#f5fafa",
+    "messageRadius": "0px",
+    "inputRadius": "0px",
     "showTypingIndicator": true,
     "chatWidth": "400px",
     "chatHeight": "600px",
