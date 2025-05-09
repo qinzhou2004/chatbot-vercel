@@ -13,7 +13,7 @@ module.exports = {
     "Cómo contactar soporte"
   ],
   "showBranding": true,
-  "enableVoiceInput": false,
+  "enableVoiceInput": true,
   "responseDelay": 1000,
   "cssConfig": {
     "primaryColor": "#f4f5f6",
