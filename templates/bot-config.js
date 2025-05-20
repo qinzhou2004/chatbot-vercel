@@ -7,6 +7,9 @@ module.exports = {
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
+  "ratingUrl": "https://g.page/r/CVINvm0EyAyLEBE/review", // url de la pagina para dejar la reseña
+  "ratingPrompt": "Agradeceríamos mucho que evaluara nuestro servicio：", // personalizar la frase
+
   "initialSuggestions": [
     "Pregunta frecuente 1",
     "Pregunta frecuente 2",
@@ -27,4 +30,5 @@ module.exports = {
     "fontSize": "16px",
     "darkMode": false
   }
+
 }

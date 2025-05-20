@@ -3,6 +3,9 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import config from '../templates/bot-config';
 const STORAGE_KEY = 'chat_history'; 
+const CHAT_HISTORY_KEY = 'chat_history';
+const INACTIVITY_TIMEOUT = 120000; // 2分钟
+const TRIGGER_KEYWORDS = ['gracias', 'Gracias', 'adios', 'Adios', 'Agu', 'agu', 'bien', 'muy bien','Muy bien', 'Bien']; // 触发关键词
 
 export default function Home() {
   const [messages, setMessages] = useState(() => {
@@ -18,13 +21,28 @@ export default function Home() {
   const chatContainerRef = useRef(null);
   const saveToStorage = (messages) => {
   const data = JSON.stringify(messages);
-  if (data.length > 6000000) { // 限制约4.5MB
-    const trimmed = messages.slice(-25); // 保留最近20条
+  if (data.length > 6000000) { // 限制约6MB
+    const trimmed = messages.slice(-25); // 保留最近25条
     localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
     return;
   }
   localStorage.setItem(STORAGE_KEY, data);
 };
+const [showRatingPrompt, setShowRatingPrompt] = useState(false);
+const inactivityTimer = useRef(null);
+const checkForRatingTrigger = (newMessage) => {
+    // 当收到客服消息且包含触发词时
+    if (newMessage.role === 'assistant') {
+      const containsKeyword = TRIGGER_KEYWORDS.some(keyword => 
+        newMessage.content.includes(keyword)
+      );
+      
+      if (containsKeyword && !showRatingPrompt) {
+        setShowRatingPrompt(true);
+        addRatingMessage();
+      }
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -80,7 +98,7 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-
+    resetInactivityTimer();
     const userMessage = { role: 'user', content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
@@ -120,6 +138,36 @@ export default function Home() {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [messages]);
+
+  const addRatingMessage = () => {
+    const ratingMessage = {
+      role: 'assistant',
+      content: `Agradeceríamos mucho que evaluara nuestro servicio：<a href="${config.ratingUrl}" target="_blank" rel="noopener noreferrer">点击这里评价</a>`,
+      isRating: true
+    };
+    
+    setMessages(prev => [...prev, ratingMessage]);
+  };
+
+  // 重置无活动计时器
+  const resetInactivityTimer = () => {
+    if (inactivityTimer.current) {
+      clearTimeout(inactivityTimer.current);
+    }
+    
+    inactivityTimer.current = setTimeout(() => {
+      if (!showRatingPrompt && messages.length > 0) {
+        setShowRatingPrompt(true);
+        addRatingMessage();
+      }
+    }, INACTIVITY_TIMEOUT);
+  };
+
+  useEffect(() => {
+    resetInactivityTimer();
+    return () => clearTimeout(inactivityTimer.current);
+  }, [messages]);
+  
     
   };
 
@@ -172,6 +220,15 @@ export default function Home() {
               {msg.content}
             </div>
           ))}
+          {messages.map((msg, index) => (
+          <div 
+            key={index}
+            className={`${styles.message} ${
+              msg.role === 'user' ? styles.userMessage : styles.assistantMessage
+            } ${msg.isRating ? styles.ratingMessage : ''}`}
+            dangerouslySetInnerHTML={{ __html: msg.content }}
+          />
+        ))}
           {isLoading && config.cssConfig.showTypingIndicator && (
             <div className={styles.typingIndicator}>
               <div className={styles.typingDot}></div>
@@ -180,7 +237,6 @@ export default function Home() {
             </div>
           )}
         </div>
-
         <div className={styles.inputArea}>
           <form onSubmit={handleSubmit} className={styles.inputForm}>
             <input
