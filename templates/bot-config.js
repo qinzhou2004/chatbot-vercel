@@ -7,8 +7,6 @@ module.exports = {
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
-  "ratingUrl": "https://www.coolmod.com/tarjetas-graficas/",
-  "ratingPrompt": "Agradeceríamos mucho que evaluara nuestro servicio：",
   "initialSuggestions": [
     "Pregunta frecuente 1",
     "Pregunta frecuente 2",
