@@ -1,15 +1,14 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "gfdgfd",
-  "mainHeading": "gfdgfd",
-  "subHeading": "gfdgfdgfd",
+  "pageTitle": "hhhhhhhh",
+  "mainHeading": "hhhhhhhhhhhhhhhhhhhhhhhhh",
+  "subHeading": "hhhhhhhhhhhhhhhhhhhhhhhhh",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
-  "ratingUrl": "https://g.page/r/CVINvm0EyAyLEBE/review", // url de la pagina para dejar la reseña
-  "ratingPrompt": "Agradeceríamos mucho que evaluara nuestro servicio：", // personalizar la frase
-
+  "ratingUrl": "https://www.coolmod.com/tarjetas-graficas/",
+  "ratingPrompt": "Agradeceríamos mucho que evaluara nuestro servicio：",
   "initialSuggestions": [
     "Pregunta frecuente 1",
     "Pregunta frecuente 2",
@@ -30,5 +29,4 @@ module.exports = {
     "fontSize": "16px",
     "darkMode": false
   }
-
 }
