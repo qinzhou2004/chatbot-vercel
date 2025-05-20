@@ -38,7 +38,14 @@ export default function Home() {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
+
+  const lastMessageRef = useRef(null);
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isLoading]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,6 +122,7 @@ export default function Home() {
           {messages.map((msg, index) => (
             <div 
               key={index} 
+              ref={index === messages.length - 1 ? lastMessageRef : null}
               className={`${styles.message} ${
                 msg.role === 'user' ? styles.userMessage : styles.assistantMessage
               } ${index === 0 ? styles.firstMessage : ''}`}
