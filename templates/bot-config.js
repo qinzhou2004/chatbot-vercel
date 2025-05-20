@@ -1,11 +1,11 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "hhhhhhhh",
-  "mainHeading": "hhhhhhhhhhhhhhhhhhhhhhhhh",
-  "subHeading": "hhhhhhhhhhhhhhhhhhhhhhhhh",
+  "pageTitle": "chatbot_nkzn",
+  "mainHeading": "Soporte desde NKZN Service",
+  "subHeading": "Expertos en tecnología!",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
-  "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
+  "welcomeMessage": "¡Hola! Bienvenido al NKZN Service. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
   "initialSuggestions": [
     "Pregunta frecuente 1",
@@ -23,8 +23,8 @@ module.exports = {
     "showTypingIndicator": true,
     "chatWidth": "400px",
     "chatHeight": "600px",
-    "fontFamily": "Arial, sans-serif",
-    "fontSize": "16px",
+    "fontFamily": "'Helvetica Neue', sans-serif",
+    "fontSize": "14px",
     "darkMode": false
   }
 }
