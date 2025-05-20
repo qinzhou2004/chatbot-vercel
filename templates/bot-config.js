@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "chatbotnkznprueba1",
-  "mainHeading": "chatbotnkznprueba1",
-  "subHeading": "chatbotnkznprueba1",
+  "pageTitle": "gfdgfd",
+  "mainHeading": "gfdgfd",
+  "subHeading": "gfdgfdgfd",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
@@ -16,8 +16,8 @@ module.exports = {
   "enableVoiceInput": false,
   "responseDelay": 1000,
   "cssConfig": {
-    "primaryColor": "#070808",
-    "secondaryColor": "#0f1010",
+    "primaryColor": "#0070f3",
+    "secondaryColor": "#00dddd",
     "messageRadius": "18px",
     "inputRadius": "20px",
     "showTypingIndicator": true,
