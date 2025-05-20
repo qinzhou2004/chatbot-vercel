@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import config from '../templates/bot-config';
+const STORAGE_KEY = 'chat_history'; 
 
 export default function Home() {
   const [messages, setMessages] = useState(() => {
@@ -15,6 +16,15 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [threadId, setThreadId] = useState(null);
   const chatContainerRef = useRef(null);
+  const saveToStorage = (messages) => {
+  const data = JSON.stringify(messages);
+  if (data.length > 6000000) { // 限制约4.5MB
+    const trimmed = messages.slice(-25); // 保留最近20条
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+    return;
+  }
+  localStorage.setItem(STORAGE_KEY, data);
+};
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
