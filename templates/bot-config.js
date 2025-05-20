@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "ñññññññ",
-  "mainHeading": "ññññññññññ",
-  "subHeading": "ññññññññññ",
+  "pageTitle": "ttttttttttttttfdgfdgfd",
+  "mainHeading": "tyryhtrfhytrytr",
+  "subHeading": "jghfjhgjhgjhgjhg",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
