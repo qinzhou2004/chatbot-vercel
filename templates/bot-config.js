@@ -1,8 +1,8 @@
 // Auto-generated config
 module.exports = {
-  "pageTitle": "gfdgfd",
-  "mainHeading": "gfdgfd",
-  "subHeading": "gfdgfdgfd",
+  "pageTitle": "Mi Chatbot Personalizado",
+  "mainHeading": "Soporte NKZN",
+  "subHeading": "Expertos en tecnología!",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
