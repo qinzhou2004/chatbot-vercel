@@ -1,7 +1,7 @@
 // Auto-generated config
 module.exports = {
   "pageTitle": "chatbot_nkzn",
-  "mainHeading": "Soporte desde NKZN Service",
+  "mainHeading": "Soporte NKZN",
   "subHeading": "Expertos en tecnología!",
   "inputPlaceholder": "Escribe tu mensaje aquí...",
   "submitButtonText": "Enviar",
