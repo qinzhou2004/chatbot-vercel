@@ -4,12 +4,27 @@ import styles from '../styles/Home.module.css';
 import config from '../templates/bot-config';
 
 export default function Home() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    }
+    return [];
+  });
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [threadId, setThreadId] = useState(null);
   const chatContainerRef = useRef(null);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      } catch (error) {
+        console.error('Error de cargacion para memoria local:', error);
+      }
+    }
+  }, [messages]);
   // 初始化对话线程
   useEffect(() => {
     const initializeThread = async () => {
@@ -17,10 +32,14 @@ export default function Home() {
         const response = await fetch('/api/init-thread');
         const data = await response.json();
         setThreadId(data.threadId);
-        setMessages([{
-          role: 'assistant',
-          content: config.welcomeMessage || '¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?'
-        }]);
+        
+        // 只有初次加载且没有历史记录时才显示欢迎消息
+        if (messages.length === 0) {
+          setMessages(prev => [...prev, {
+            role: 'assistant',
+            content: config.welcomeMessage || '¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?'
+          }]);
+        }
       } catch (error) {
         console.error('Error initializing thread:', error);
         setMessages([{
@@ -31,7 +50,8 @@ export default function Home() {
     };
     
     initializeThread();
-  }, []);
+  }, []); // 确保空依赖数组
+
 
   // 滚动到最新消息
   useEffect(() => {
@@ -79,6 +99,18 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
+
+    useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [messages]);
+    
   };
 
   return (
