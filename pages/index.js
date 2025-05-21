@@ -146,7 +146,7 @@ const handleActivity = () => {
         if (messages.length === 0) {
           setMessages(prev => [...prev, {
             role: 'assistant',
-            content: config.welcomeMessage || '¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?'
+            content: config.welcomeMessage 
           }]);
         }
       } catch (error) {
@@ -288,7 +288,7 @@ const handleActivity = () => {
                     Continuar
                   </button>
                   <button onClick={() => window.open(config.feedbackUrl, '_blank')}>
-                    Comentario
+                    Dejar tus reseñas
                   </button>
                   <button 
                     onClick={handleCloseChat}  // 改为调用关闭方法
@@ -298,7 +298,7 @@ const handleActivity = () => {
                       border: '1px solid #ddd'
                     }}
                   >
-                    Cerrar chat  // 修改按钮文字
+                    Cerrar esta chat
                   </button>
                 </div>
               </div>
