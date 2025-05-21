@@ -207,7 +207,7 @@ const handleActivity = () => {
     setShowCloseModal(false);
     setMessages([{
       role: 'assistant',
-      content: config.welcomeMessage || '¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?'
+      content: config.welcomeMessage
     }]);
     fetch('/api/init-thread')
       .then(res => res.json())
