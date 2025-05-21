@@ -7,6 +7,7 @@ module.exports = {
   "submitButtonText": "Enviar",
   "welcomeMessage": "¡Hola! Soy tu asistente. ¿En qué puedo ayudarte hoy?",
   "errorMessage": "Disculpa, estoy teniendo problemas. ¿Podrías intentarlo de nuevo?",
+  "feedbackUrl":"https://g.page/r/CVINvm0EyAyLEBE/review",
   "initialSuggestions": [
     "Pregunta frecuente 1",
     "Pregunta frecuente 2",

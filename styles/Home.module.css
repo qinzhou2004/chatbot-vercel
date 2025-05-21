@@ -97,6 +97,47 @@
   margin-right: auto;
 }
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modalButtons {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--input-radius);
+  cursor: pointer;
+}
+
+.modalButtons button:first-child {
+  background-color: var(--color-primary);
+  color: white;
+}
+
 .firstMessage {
   margin-top: auto;
 }
